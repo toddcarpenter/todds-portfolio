@@ -1,0 +1,309 @@
+/* space & thicks */
+$base-spacing: 8px;
+$border-md: 4px;
+$border-lg: 8px;
+
+/* colors */
+$gray: #a3a3a3;
+$gray-light: lighten($gray, 25%);
+$gray-dark: darken($gray, 45%);
+$purple-dark: #26001d;
+$purple: #890069;
+$purple-light: lighten($purple, 55%);
+
+@function space($multiplyer:1) {
+  $spacing: $base-spacing * $multiplyer;
+  @return $spacing;
+}
+
+.prettified {
+  * {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  &.body {
+    font-size: 18px;
+    font-family: "Libre Baskerville", Georgia, serif;
+    margin: 0;
+    min-height: 100vh;
+    text-align: center;
+    color: $gray-dark;
+  }
+
+  .section {
+    position: relative;
+    z-index: 2;
+    padding: space(2);
+    background: white;
+  }
+
+  h1, h2, button, .portfolio__item {
+    font-family: "Open Sans", sans-serif;
+  }
+
+  h1, h2 {
+    margin-bottom: space(5);
+  }
+
+  h1 {
+    font-size: clamp(6rem, 9vw, 10rem);
+    text-shadow: -2px 2px $purple-dark, -3px 3px $purple-light;
+  }
+
+  h2 {
+    font-size: clamp(3.5rem, 6vw, 5.25rem);
+    color: $purple;
+    border: 2px solid white;
+    text-shadow: -2px 2px #fff, -3px 3px $gray;
+    margin-bottom: space(10);
+  }
+
+  h3 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  }
+
+  p {
+    margin: {
+      top: 0;
+      bottom: space(5);
+    }
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  em {
+    font-style: normal;
+  }
+
+  .portfolio__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: {
+      top: space(-1);
+      bottom: space(6);
+    }
+  }
+
+  .portfolio__item {
+    margin: 0 space(1);
+    padding: space(1) space(1.5);
+    border-radius: $border-lg;
+    border: 2px solid $gray;
+    color: $gray-dark;
+    font-size: 1rem;
+    margin-top: space(1);
+  }
+
+  .portfolio__img {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    border: solid 2px $gray-light;
+    margin: {
+      left: auto;
+      right: auto;
+    }
+  }
+
+  .portfolio__rule {
+    height: 1px;
+    background-color: $gray-light;
+    border: none;
+    margin: {
+      top: space(10);
+      bottom: space(8);
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover, &:focus, &:active {
+      text-decoration: none;
+    }
+  }
+
+  .link {
+    display: inline-block;
+    color: $purple-light;
+    text-decoration: none;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 0%;
+      height: 1px;
+      background: $purple-light;
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transition: width 0.25s ease-in-out, left 0.25s ease-in-out;
+    }
+
+    &:hover, &:focus, &:active {
+      color: $purple-light;
+      text-decoration: none;
+
+      &::before {
+        width: 100%;
+        left: 0%;
+      }
+    }
+  }
+
+  .link--header {
+    &:hover, &:focus, &:active {
+      &::before {
+        width: 90%;
+        left: 10%;
+      }
+    }
+  }
+
+  .link--portfolio {
+    color: $purple;
+    display: inline-block;
+    margin-top: space(2);
+
+    &:hover, &:focus, &:active {
+      color: $purple;
+
+      &::before {
+        background-color: $purple;
+      }
+    }
+  }
+
+  .btn {
+    cursor: pointer;
+    padding: space(2) space(4) space(1.95);
+    background: $purple;
+    border: $border-md solid white;
+    color: white;
+    border-radius: 38px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    min-width: 240px;
+    margin: space(2) auto;
+    transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+    &:hover, &:focus, &:active {
+      background: darken($purple, 7%);
+      border-color: $purple-light;
+      filter: drop-shadow(20px 10px 4px $purple-dark);
+    }
+  }
+
+  .btn--toggle-css {
+    span {
+      display: none;
+    }
+
+    &::after {
+      content: "Disable Styles";
+    }
+  }
+
+  .section--intro {
+    //position: sticky;
+    //top: 0;
+    z-index: 1;
+    color: white;
+    min-height: 100vh;
+    background: $purple-dark;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header__wrap-img {
+    position: relative;
+    overflow: hidden;
+    width: 220px;
+    height: 220px;
+    border: $border-lg solid white;
+    border-radius: 50%;
+    transition: border-color 0.25s ease-in-out;
+
+    &::after {
+      content: "";
+      width: 220px;
+      height: 220px;
+      background: url("../images/todd-flip.jpg") no-repeat;
+      background-size: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 50%;
+    }
+
+    &:hover, &:focus, &:active {
+      border-color: $purple-light;
+
+      &::after {
+        display: block;
+        transform: translateY(0%);
+      }
+    }
+  }
+
+  .icon {
+    top: 9px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    transition: fill 0.25s ease-in-out;
+
+    &:hover, &:focus, &:active {
+      fill: $purple-light;
+    }
+  }
+
+  .icon--linkedin {
+    fill: white;
+  }
+
+  .icon--instagram {
+    fill: white;
+  }
+
+  .heart {
+    color: $purple;
+    font-style: normal;
+    margin-right: -12px; /* allow text to center */
+    font-size: 1.5rem;
+    position: relative;
+    bottom: -2px;
+  }
+
+  .json {
+    font-size: 1.15rem;
+    
+    em {
+      font-style: italic;
+    }
+  }
+
+  .section--footer {
+    color: white;
+    background: $purple-dark;
+
+    p {
+      margin: {
+        top: space(2);
+        bottom: space(2);
+      }
+    }
+  }
+
+  .portfolio__stack {
+    display: none;
+  }
+}
